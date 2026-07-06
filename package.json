@@ -1,0 +1,44 @@
+{
+  "name": "template-playwright-pom",
+  "version": "1.0.0",
+  "description": "Template de automatizacion E2E con TypeScript, Playwright, Cucumber y Page Object Model.",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "clean:artifacts": "node scripts/clean-artifacts.js",
+    "test": "npm run clean:artifacts && cucumber-js",
+    "test:headed": "npm run clean:artifacts && cross-env HEADLESS=false cucumber-js",
+    "test:debug": "npm run clean:artifacts && cross-env HEADLESS=false PWDEBUG=1 cucumber-js --tags \"not @requiresCredentials\"",
+    "test:all": "npm run clean:artifacts && cross-env CUCUMBER_TAGS=\"\" cucumber-js",
+    "test:login": "npm run clean:artifacts && cross-env CUCUMBER_TAGS=\"@login and not @requiresCredentials\" cucumber-js",
+    "test:credentials": "npm run clean:artifacts && cross-env CUCUMBER_TAGS=\"@requiresCredentials\" cucumber-js",
+    "report": "npm run clean:artifacts && cucumber-js --format progress --format html:reports/cucumber-report.html",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"src/**/*.ts\"",
+    "format": "prettier --write \"**/*.{ts,js,json,md,yml}\""
+  },
+  "keywords": [
+    "playwright",
+    "cucumber",
+    "typescript",
+    "pom",
+    "e2e",
+    "bdd"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@cucumber/cucumber": "^10.9.0",
+    "@playwright/test": "^1.45.3",
+    "@types/node": "^20.14.10",
+    "@typescript-eslint/eslint-plugin": "^7.16.1",
+    "@typescript-eslint/parser": "^7.16.1",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.3.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  }
+}
